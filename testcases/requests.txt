@@ -1,0 +1,95 @@
+curl -X PUT "http://127.0.0.1:8080/v2/service_instances/{uuid:eac81314-a0a5-4102-a117-74f705c079b6}?accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json" -d {"service_id": "f8e0bb08-bd8d-4899-9058-28ef2a3e2701",   "plan_id": "ed1bda66-bc7b-495c-a8c2-3740217085be",   "context": {     "platform": "assessment",     "user": "test-user"   },   "parameters": {     "mongodb_port": 27017 } }'
+
+curl -X PUT "http://127.0.0.1:8080/v2/service_instances/{uuid:eac81314-a0a5-4102-a117-74f705c079b6}?accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json" -d "{\"service_id\":\"f8e0bb08-bd8d-4899-9058-28ef2a3e2701\",\"plan_id\":\"ed1bda66-bc7b-495c-a8c2-3740217085be\"}"
+
+curl -X PUT "http://127.0.0.1:8080/v2/service_instances/{uuid:eac81214-a0a5-4102-a117-74f705c079b6}?accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json" -d "{\"service_id\":\"f8e0bb08-bd8d-4899-9058-28ef2a3e2701\",\"plan_id\":\"ed1bda66-bc7b-495c-a8c2-3740217085be\"}"
+
+curl -X GET "http://127.0.0.1:8080/v2/service_instances/{uuid:eac81314-a0a5-4102-a117-74f705c079b6}
+
+curl -X DELETE "http://127.0.0.1:8080/v2/service_instances/eac81314-a0a5-4102-a117-74f705c079b6?service_id=f8e0bb08-bd8d-4899-9058-28ef2a3e2701&plan_id=ed1bda66-bc7b-495c-a8c2-3740217085be&accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json"
+
+
+curl -X GET "http://192.168.1.134:5002/mongos"
+
+curl -X PUT "http://127.0.0.1:8081/v2/service_instances/{uuid:eac81314-a0a5-4102-a117-74f705c079b6}?accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json" -d "{\"service_id\":\"f8e0bb08-bd8d-4899-9058-28ef2a3e2701\",\"plan_id\":\"ed1bda66-bc7b-495c-a8c2-3740217085be\"}"
+
+curl -X PUT "http://127.0.0.1:8082/v2/service_instances/{uuid:eac81314-a0a5-4102-a117-74f705c079b6}?accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json" -d "{\"service_id\":\"f8e0bb08-bd8d-4899-9058-28ef2a3e2701\",\"plan_id\":\"ed1bda66-bc7b-495c-a8c2-3740217085be\"}"
+
+curl -X PUT "http://127.0.0.1:8081/v2/service_instances/{uuid:eac11314-a0a5-4102-a117-74f705c079b6}?accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json" -d "{\"service_id\":\"f8e0bb08-bd8d-4899-9058-28ef2a3e2701\",\"plan_id\":\"ed1bda66-bc7b-495c-a8c2-3740217085be\"}"
+
+curl -X PUT "http://127.0.0.1:8081/v2/service_instances/{uuid:eac21314-a0a5-4102-a117-74f705c079b6}?accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json" -d "{\"service_id\":\"f8e0bb08-bd8d-4899-9058-28ef2a3e2701\",\"plan_id\":\"ed1bda66-bc7b-495c-a8c2-3740217085be\"}"
+
+
+curl -X PUT "http://127.0.0.1:8081/v2/service_instances/{uuid:req3}?accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json" -d "{\"service_id\":\"f8e0bb08-bd8d-4899-9058-28ef2a3e2701\",\"plan_id\":\"ed1bda66-bc7b-495c-a8c2-3740217085be\"}"
+
+curl -X PUT "http://127.0.0.1:8081/v2/service_instances/{uuid:req4}?accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json" -d "{\"service_id\":\"f8e0bb08-bd8d-4899-9058-28ef2a3e2701\",\"plan_id\":\"ed1bda66-bc7b-495c-a8c2-3740217085be\"}"
+
+
+curl -X PUT "http://127.0.0.1:8082/v2/service_instances/{uuid:req5}?accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json" -d "{\"service_id\":\"f8e0bb08-bd8d-4899-9058-28ef2a3e2701\",\"plan_id\":\"ed1bda66-bc7b-495c-a8c2-3740217085be\"}"
+
+curl -X PUT "http://127.0.0.1:8082/v2/service_instances/{uuid:req6}?accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json" -d "{\"service_id\":\"f8e0bb08-bd8d-4899-9058-28ef2a3e2701\",\"plan_id\":\"ed1bda66-bc7b-495c-a8c2-3740217085be\"}"
+
+
+curl -X PUT "http://127.0.0.1:8083/v2/service_instances/{uuid:req7}?accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json" -d "{\"service_id\":\"f8e0bb08-bd8d-4899-9058-28ef2a3e2701\",\"plan_id\":\"ed1bda66-bc7b-495c-a8c2-3740217085be\"}"
+
+curl -X PUT "http://127.0.0.1:8083/v2/service_instances/{uuid:req8}?accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json" -d "{\"service_id\":\"f8e0bb08-bd8d-4899-9058-28ef2a3e2701\",\"plan_id\":\"ed1bda66-bc7b-495c-a8c2-3740217085be\"}"
+
+curl -X PUT "http://127.0.0.1:8083/v2/service_instances/{uuid:req9}?accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json" -d "{\"service_id\":\"f8e0bb08-bd8d-4899-9058-28ef2a3e2701\",\"plan_id\":\"ed1bda66-bc7b-495c-a8c2-3740217085be\"}"
+
+curl -X PUT "http://127.0.0.1:8083/v2/service_instances/{uuid:req10}?accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json" -d "{\"service_id\":\"f8e0bb08-bd8d-4899-9058-28ef2a3e2701\",\"plan_id\":\"ed1bda66-bc7b-495c-a8c2-3740217085be\"}"
+
+
+curl -X PUT "http://127.0.0.1:8081/v2/service_instances/{uuid:req11}?accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json" -d "{\"service_id\":\"f8e0bb08-bd8d-4899-9058-28ef2a3e2701\",\"plan_id\":\"ed1bda66-bc7b-495c-a8c2-3740217085be\"}"
+
+curl -X PUT "http://127.0.0.1:8081/v2/service_instances/req12?accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json" -d "{\"service_id\":\"f8e0bb08-bd8d-4899-9058-28ef2a3e2701\",\"plan_id\":\"ed1bda66-bc7b-495c-a8c2-3740217085be\"}"
+
+curl -X DELETE "http://127.0.0.1:8081/v2/service_instances/req12?service_id=f8e0bb08-bd8d-4899-9058-28ef2a3e2701&plan_id=ed1bda66-bc7b-495c-a8c2-3740217085be&accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json"
+
+curl -X PUT "http://127.0.0.1:5002/mongos" -H "cache-control: no-cache" -H "content-type: application/json" -d "{\"instId\":\"req33\",\"port\":\"27087\"}"
+
+curl -X PUT "http://127.0.0.1:5002/mongos" -H "cache-control: no-cache" -H "content-type: application/json" -d "{"instId":"req33","port":"27087"}"
+
+curl -X DELETE "http://localhost:5002/mongos" -H "cache-control: no-cache" -H "content-type: application/json" -d '{"instId":"req52"}'
+
+// High availability & Horizontal scalability tests
+###START 9 provision request against the first Broker###
+
+curl -X PUT "http://127.0.0.1:8081/v2/service_instances/req40?accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json" -d "{\"service_id\":\"f8e0bb08-bd8d-4899-9058-28ef2a3e2701\",\"plan_id\":\"ed1bda66-bc7b-495c-a8c2-3740217085be\"}"
+
+curl -X PUT "http://127.0.0.1:8081/v2/service_instances/req41?accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json" -d "{\"service_id\":\"f8e0bb08-bd8d-4899-9058-28ef2a3e2701\",\"plan_id\":\"ed1bda66-bc7b-495c-a8c2-3740217085be\"}"
+
+curl -X PUT "http://127.0.0.1:8081/v2/service_instances/req42?accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json" -d "{\"service_id\":\"f8e0bb08-bd8d-4899-9058-28ef2a3e2701\",\"plan_id\":\"ed1bda66-bc7b-495c-a8c2-3740217085be\"}"
+
+curl -X PUT "http://127.0.0.1:8081/v2/service_instances/req43?accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json" -d "{\"service_id\":\"f8e0bb08-bd8d-4899-9058-28ef2a3e2701\",\"plan_id\":\"ed1bda66-bc7b-495c-a8c2-3740217085be\"}"
+
+curl -X PUT "http://127.0.0.1:8081/v2/service_instances/req44?accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json" -d "{\"service_id\":\"f8e0bb08-bd8d-4899-9058-28ef2a3e2701\",\"plan_id\":\"ed1bda66-bc7b-495c-a8c2-3740217085be\"}"
+
+curl -X PUT "http://127.0.0.1:8081/v2/service_instances/req45?accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json" -d "{\"service_id\":\"f8e0bb08-bd8d-4899-9058-28ef2a3e2701\",\"plan_id\":\"ed1bda66-bc7b-495c-a8c2-3740217085be\"}"
+
+curl -X PUT "http://127.0.0.1:8081/v2/service_instances/req46?accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json" -d "{\"service_id\":\"f8e0bb08-bd8d-4899-9058-28ef2a3e2701\",\"plan_id\":\"ed1bda66-bc7b-495c-a8c2-3740217085be\"}"
+
+curl -X PUT "http://127.0.0.1:8081/v2/service_instances/req47?accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json" -d "{\"service_id\":\"f8e0bb08-bd8d-4899-9058-28ef2a3e2701\",\"plan_id\":\"ed1bda66-bc7b-495c-a8c2-3740217085be\"}"
+
+curl -X PUT "http://127.0.0.1:8081/v2/service_instances/req48?accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json" -d "{\"service_id\":\"f8e0bb08-bd8d-4899-9058-28ef2a3e2701\",\"plan_id\":\"ed1bda66-bc7b-495c-a8c2-3740217085be\"}"
+
+
+###START 9 deProvision request###
+
+curl -X DELETE "http://127.0.0.1:8081/v2/service_instances/req40?service_id=f8e0bb08-bd8d-4899-9058-28ef2a3e2701&plan_id=ed1bda66-bc7b-495c-a8c2-3740217085be&accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json"
+
+curl -X DELETE "http://127.0.0.1:8081/v2/service_instances/req41?service_id=f8e0bb08-bd8d-4899-9058-28ef2a3e2701&plan_id=ed1bda66-bc7b-495c-a8c2-3740217085be&accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json"
+
+curl -X DELETE "http://127.0.0.1:8081/v2/service_instances/req42?service_id=f8e0bb08-bd8d-4899-9058-28ef2a3e2701&plan_id=ed1bda66-bc7b-495c-a8c2-3740217085be&accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json"
+
+curl -X DELETE "http://127.0.0.1:8081/v2/service_instances/req43?service_id=f8e0bb08-bd8d-4899-9058-28ef2a3e2701&plan_id=ed1bda66-bc7b-495c-a8c2-3740217085be&accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json"
+
+curl -X DELETE "http://127.0.0.1:8081/v2/service_instances/req44?service_id=f8e0bb08-bd8d-4899-9058-28ef2a3e2701&plan_id=ed1bda66-bc7b-495c-a8c2-3740217085be&accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json"
+
+curl -X DELETE "http://127.0.0.1:8081/v2/service_instances/req45?service_id=f8e0bb08-bd8d-4899-9058-28ef2a3e2701&plan_id=ed1bda66-bc7b-495c-a8c2-3740217085be&accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json"
+
+curl -X DELETE "http://127.0.0.1:8081/v2/service_instances/req46?service_id=f8e0bb08-bd8d-4899-9058-28ef2a3e2701&plan_id=ed1bda66-bc7b-495c-a8c2-3740217085be&accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json"
+
+curl -X DELETE "http://127.0.0.1:8081/v2/service_instances/req47?service_id=f8e0bb08-bd8d-4899-9058-28ef2a3e2701&plan_id=ed1bda66-bc7b-495c-a8c2-3740217085be&accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json"
+
+curl -X DELETE "http://127.0.0.1:8081/v2/service_instances/req48?service_id=f8e0bb08-bd8d-4899-9058-28ef2a3e2701&plan_id=ed1bda66-bc7b-495c-a8c2-3740217085be&accepts_incomplete=true" -H "cache-control: no-cache" -H "content-type: application/json"
+

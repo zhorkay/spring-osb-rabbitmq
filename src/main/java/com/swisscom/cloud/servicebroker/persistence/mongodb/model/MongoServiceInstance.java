@@ -18,6 +18,7 @@ public class MongoServiceInstance {
 
     @Id
     private String instanceId;
+
     private String serviceDefinitionId;
     private String planId;
     private Map<String, Object> parameters;

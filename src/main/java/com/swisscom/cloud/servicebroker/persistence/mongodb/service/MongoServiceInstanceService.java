@@ -1,12 +1,15 @@
 package com.swisscom.cloud.servicebroker.persistence.mongodb.service;
 
-import com.swisscom.cloud.config.AppMQConfiguration;
+import com.swisscom.cloud.ApplicationManager;
+import com.swisscom.cloud.config.MQConfiguration;
 import com.swisscom.cloud.servicebroker.persistence.mongodb.model.MongoServiceInstance;
 import com.swisscom.cloud.servicebroker.persistence.mongodb.repository.MongoServiceInstanceRepository;
-import com.swisscom.cloud.servicebroker.persistence.mongodb.serviceprovider.MongoInstanceManagement;
+import com.swisscom.cloud.servicebroker.persistence.mongodb.serviceprovider.MongoDbProvider;
+import com.swisscom.cloud.servicebroker.persistence.mongodb.serviceprovider.MongoDbProviderSingleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.servicebroker.model.instance.*;
 import org.springframework.cloud.servicebroker.service.ServiceInstanceService;
 import org.springframework.stereotype.Service;
@@ -17,15 +20,16 @@ import java.util.Map;
 @Service
 public class MongoServiceInstanceService implements ServiceInstanceService {
 
+    @Autowired
+    private ApplicationManager applicationManager;
+
     private static final Logger logger = LoggerFactory.getLogger(MongoServiceInstanceService.class);
 
-    private final MongoServiceInstanceRepository repository;
-    private final RabbitTemplate rabbitTemplate;
+    @Autowired
+    private MongoServiceInstanceRepository repository;
 
-    public MongoServiceInstanceService(MongoServiceInstanceRepository repository, RabbitTemplate rabbitTemplate) {
-        this.repository = repository;
-        this.rabbitTemplate = rabbitTemplate;
-    }
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     @Override
     public Mono<CreateServiceInstanceResponse> createServiceInstance(CreateServiceInstanceRequest request) {
@@ -33,11 +37,14 @@ public class MongoServiceInstanceService implements ServiceInstanceService {
         String serviceDefinitionId = request.getServiceDefinitionId();
         String planId = request.getPlanId();
         Map<String, Object> parameters = request.getParameters();
+        parameters.put("fromPort", applicationManager.getPort());
+        MongoDbProviderSingleton mongos = MongoDbProviderSingleton.getInstance();
+        parameters.put("mongoPort", mongos.nextPort());
 
-        MongoServiceInstance instance = this.repository.findById(serviceInstanceId).block();
+        MongoServiceInstance instance = this.repository.findById(serviceInstanceId).orElse(null);
         if (instance == null) {
             instance = new MongoServiceInstance(serviceInstanceId, serviceDefinitionId, planId, parameters);
-            this.rabbitTemplate.convertAndSend(AppMQConfiguration.topicExchangeName, "swisscom.queue.create", instance);
+            this.rabbitTemplate.convertAndSend(MQConfiguration.topicExchangeName, "swisscom.queue.create", instance);
         }
         else {
             logger.error("MongoServiceInstance exists: " + instance.toString());
@@ -52,18 +59,19 @@ public class MongoServiceInstanceService implements ServiceInstanceService {
 
     @Override
     public Mono<DeleteServiceInstanceResponse> deleteServiceInstance(DeleteServiceInstanceRequest request) {
-        String serviceInstanceId = request.getServiceInstanceId();
-        String serviceDefinitionId = request.getServiceDefinitionId();
-        String planId = request.getPlanId();
-
-
-        MongoServiceInstance instance = this.repository.findById(serviceInstanceId).block();
+        logger.info("swisscom.queue.delete request with: " + request.getServiceInstanceId());
+        MongoServiceInstance instance = repository.findById(request.getServiceInstanceId()).orElse(null);
         if (instance != null) {
-            this.rabbitTemplate.convertAndSend(AppMQConfiguration.topicExchangeName, "swisscom.queue.delete", instance);
+            this.rabbitTemplate.convertAndSend(
+                    MQConfiguration.topicExchangeName,
+                    "swisscom.queue.delete",
+                    instance
+            );
         }
         else {
-            logger.error("MongoServiceInstance does not exist: " + request.toString());
+            logger.error("swisscom.queue.delete request with: " + request.getServiceInstanceId() + " was not found");
         }
+
 
         return Mono.just(DeleteServiceInstanceResponse.builder()
                 .async(true)
@@ -73,7 +81,7 @@ public class MongoServiceInstanceService implements ServiceInstanceService {
     @Override
     public Mono<GetServiceInstanceResponse> getServiceInstance(GetServiceInstanceRequest request) {
         // Todo: only for test. Implementation is missing
-        return Mono.just(GetServiceInstanceResponse.builder().dashboardUrl(MongoInstanceManagement.getStatus()).build());
+        return Mono.just(GetServiceInstanceResponse.builder().dashboardUrl(MongoDbProvider.getStatus()).build());
     }
 
     @Override

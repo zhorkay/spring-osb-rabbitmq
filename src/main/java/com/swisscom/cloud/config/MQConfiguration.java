@@ -1,6 +1,6 @@
 package com.swisscom.cloud.config;
 
-import com.swisscom.cloud.integration.mq.RabbitMQMessageReceiver;
+import com.swisscom.cloud.servicebroker.persistence.mongodb.service.RabbitMQMessageReceiver;
 import com.swisscom.cloud.servicebroker.persistence.mongodb.model.MongoServiceInstance;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class AppMQConfiguration {
+public class MQConfiguration {
 
     public static final String topicExchangeName = "swisscom-osb-exchange";
 
@@ -52,13 +52,27 @@ public class AppMQConfiguration {
     }
 
     @Bean
-    SimpleMessageListenerContainer container(ConnectionFactory connectionFactory,
-                                             MessageListenerAdapter listenerAdapter) {
+    SimpleMessageListenerContainer containerCreate(ConnectionFactory connectionFactory,
+                                             MessageListenerAdapter listenerAdapterCreate) {
         SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
         container.setConnectionFactory(connectionFactory);
-        container.setQueueNames(queueNameCreate, queueNameDelete);
-        listenerAdapter.setMessageConverter(jsonConverter());
-        container.setMessageListener(listenerAdapter);
+        container.setQueueNames(queueNameCreate);
+        listenerAdapterCreate.setMessageConverter(jsonConverter());
+        container.setMessageListener(listenerAdapterCreate);
+        Jackson2JsonMessageConverter jsonConverter = new Jackson2JsonMessageConverter();
+        jsonConverter.setClassMapper(classMapper());
+
+        return container;
+    }
+
+    @Bean
+    SimpleMessageListenerContainer containerDelete(ConnectionFactory connectionFactory,
+                                                   MessageListenerAdapter listenerAdapterDelete) {
+        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
+        container.setConnectionFactory(connectionFactory);
+        container.setQueueNames(queueNameDelete);
+        listenerAdapterDelete.setMessageConverter(jsonConverter());
+        container.setMessageListener(listenerAdapterDelete);
         Jackson2JsonMessageConverter jsonConverter = new Jackson2JsonMessageConverter();
         jsonConverter.setClassMapper(classMapper());
 
@@ -74,8 +88,13 @@ public class AppMQConfiguration {
         return classMapper;
     }
     @Bean
-    MessageListenerAdapter listenerAdapter(RabbitMQMessageReceiver receiver) {
-        return new MessageListenerAdapter(receiver, "consumeMessage");
+    MessageListenerAdapter listenerAdapterCreate(RabbitMQMessageReceiver receiver) {
+        return new MessageListenerAdapter(receiver, "consumeMessageCreate");
+    }
+
+    @Bean
+    MessageListenerAdapter listenerAdapterDelete(RabbitMQMessageReceiver receiver) {
+        return new MessageListenerAdapter(receiver, "consumeMessageDelete");
     }
 
     @Bean
